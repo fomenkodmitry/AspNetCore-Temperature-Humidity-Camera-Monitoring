@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AspNetCore_Temprature_Humidity_Camera_Monitoring
+namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
 {
     public class Startup
     {
