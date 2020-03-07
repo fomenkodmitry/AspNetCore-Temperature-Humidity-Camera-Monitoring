@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore-Temperature-Humidity-Camera-Monitoring", "AspNetCore-Temperature-Humidity-Camera-Monitoring\AspNetCore-Temperature-Humidity-Camera-Monitoring.csproj", "{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
