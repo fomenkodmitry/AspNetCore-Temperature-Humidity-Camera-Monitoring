@@ -9,7 +9,7 @@
         webSocket.onmessage = onMessageReceived;
     };
 
-    var ulElement = document.getElementById('StreamToMe');
+    var ulElement = document.getElementById('stream');
 
     getWebSocketMessages(function (message) {
         ulElement.innerHTML = `<li>${message.data}</li>`

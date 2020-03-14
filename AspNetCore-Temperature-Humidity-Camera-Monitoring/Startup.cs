@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -89,12 +90,13 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
                 // Try to read the temperature.
                 var temp = dht.Temperature;
                 if (!dht.IsLastReadSuccessful) continue;
-
+                
                 // Try to read the humidity.
                 var humidity = dht.Humidity;
                 if (!dht.IsLastReadSuccessful) continue;
 
                 var res = $"Temperature: {temp.Celsius:0.0} °C, 'Humidity: {humidity:0.0} %";
+                // var res = RandomNumberGenerator.GetInt32(1,60).ToString();
                 Console.WriteLine(res);
                 await webSocket.SendAsync(
                     buffer: new ArraySegment<byte>(
