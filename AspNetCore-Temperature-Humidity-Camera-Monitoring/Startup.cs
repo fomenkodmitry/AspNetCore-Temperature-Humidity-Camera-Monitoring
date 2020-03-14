@@ -30,6 +30,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddControllers();
         }
 
@@ -40,7 +41,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStaticFiles();
             app.UseWebSockets();
             app.Use(async (context, next) =>
             {
@@ -48,7 +49,9 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
                 {
                     if (context.WebSockets.IsWebSocketRequest)
                     {
-                        await context.WebSockets.AcceptWebSocketAsync();
+                        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                        await _runDht(webSocket);
+
                     }
                     else
                     {
@@ -62,7 +65,6 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
             });
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
             // using Microsoft.AspNetCore.HttpOverrides;
@@ -75,23 +77,12 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
             app.UseAuthentication();
 
             app.UseAuthorization();
-            Task.Factory.StartNew(
-                _runDht,
-                CancellationToken.None,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Default
-            ).Unwrap();
+
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
-        private async Task _runDht()
+        private async Task _runDht(WebSocket webSocket)
         {
-            var webSocket = new ClientWebSocket();
-            // var ws = new ClientWebSocket();
-            // var uri = new Uri("wss://ws.binaryws.com/websockets/v3");
- 
-            // await ws.ConnectAsync(uri, CancellationToken.None);
-            
             using var dht = new Dht22(4);
             while (true)
             {
@@ -105,16 +96,16 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
 
                 var res = $"Temperature: {temp.Celsius:0.0} °C, 'Humidity: {humidity:0.0} %";
                 Console.WriteLine(res);
-                // await webSocket.SendAsync(
-                //     buffer: new ArraySegment<byte>(
-                //         array: Encoding.ASCII.GetBytes(res),
-                //         offset: 0,
-                //         count: res.Length
-                //     ),
-                //     messageType: WebSocketMessageType.Text,
-                //     endOfMessage: true,
-                //     cancellationToken: CancellationToken.None
-                // );
+                await webSocket.SendAsync(
+                    buffer: new ArraySegment<byte>(
+                        array: Encoding.ASCII.GetBytes(res),
+                        offset: 0,
+                        count: res.Length
+                    ),
+                    messageType: WebSocketMessageType.Text,
+                    endOfMessage: true,
+                    cancellationToken: CancellationToken.None
+                );
                 await Task.Delay(2000);
             }
             
