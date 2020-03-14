@@ -105,16 +105,16 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
 
                 var res = $"Temperature: {temp.Celsius:0.0} °C, 'Humidity: {humidity:0.0} %";
                 Console.WriteLine(res);
-                await webSocket.SendAsync(
-                    buffer: new ArraySegment<byte>(
-                        array: Encoding.ASCII.GetBytes(res),
-                        offset: 0,
-                        count: res.Length
-                    ),
-                    messageType: WebSocketMessageType.Text,
-                    endOfMessage: true,
-                    cancellationToken: CancellationToken.None
-                );
+                // await webSocket.SendAsync(
+                //     buffer: new ArraySegment<byte>(
+                //         array: Encoding.ASCII.GetBytes(res),
+                //         offset: 0,
+                //         count: res.Length
+                //     ),
+                //     messageType: WebSocketMessageType.Text,
+                //     endOfMessage: true,
+                //     cancellationToken: CancellationToken.None
+                // );
                 await Task.Delay(2000);
             }
             
