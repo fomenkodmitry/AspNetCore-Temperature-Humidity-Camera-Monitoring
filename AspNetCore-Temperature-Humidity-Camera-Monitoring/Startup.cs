@@ -90,8 +90,9 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
 
         private async Task _runDht(WebSocket webSocket)
         {
+            var cancellationToken = new CancellationTokenSource(TimeSpan.FromMinutes(3)).Token;
             using var dht = new Dht22(4);
-            while (true)
+            while (!cancellationToken.IsCancellationRequested)
             {
                 // Try to read the temperature.
                 var temp = dht.Temperature;
@@ -100,7 +101,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
                 // Try to read the humidity.
                 var humidity = dht.Humidity;
                 if (!dht.IsLastReadSuccessful) continue;
-
+                
                 var res = $"Temperature: {temp.Celsius:0.0}°C, Humidity: {humidity:0.0}%";
                 // var res = RandomNumberGenerator.GetInt32(1,60).ToString();
                 Console.WriteLine(res);
