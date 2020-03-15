@@ -31,6 +31,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
             services.AddControllers();
         }
@@ -42,6 +43,12 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
             {
                 app.UseDeveloperExceptionPage();
             }
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            
             app.UseStaticFiles();
             app.UseWebSockets();
             app.Use(async (context, next) =>
