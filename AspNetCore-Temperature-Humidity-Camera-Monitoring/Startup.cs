@@ -94,13 +94,13 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
             using var dht = new Dht22(4);
             while (!cancellationToken.IsCancellationRequested)
             {
+                if (!dht.IsLastReadSuccessful) continue;
                 // Try to read the temperature.
                 var temp = dht.Temperature;
-                if (!dht.IsLastReadSuccessful) continue;
                 
+                if (!dht.IsLastReadSuccessful) continue;
                 // Try to read the humidity.
                 var humidity = dht.Humidity;
-                if (!dht.IsLastReadSuccessful) continue;
                 
                 var res = $"Temperature: {temp.MillidegreesCelsius:0.0}°C, Humidity: {humidity:0.0}%";
                 Console.WriteLine(res);
