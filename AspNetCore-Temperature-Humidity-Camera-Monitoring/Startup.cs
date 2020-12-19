@@ -104,7 +104,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
                 if (!dht.IsLastReadSuccessful)
                     continue;
                 
-                if(double.IsNaN(temp.DegreesCelsius) || double.IsNaN(humidity))
+                if(double.IsNaN(temp.DegreesCelsius) || double.IsNaN(humidity.Value))
                     continue;
  
                 var res = $"Temperature: {temp.DegreesCelsius:0.0}°C, Humidity: {humidity:0.0}%";
@@ -119,7 +119,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
                     endOfMessage: true,
                     cancellationToken: CancellationToken.None
                 );
-                await Task.Delay(2000);
+                await Task.Delay(2000, cancellationToken);
             }
             
         }
