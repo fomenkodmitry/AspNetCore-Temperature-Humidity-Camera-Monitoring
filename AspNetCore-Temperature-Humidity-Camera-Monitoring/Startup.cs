@@ -107,7 +107,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
                 if(double.IsNaN(temp.DegreesCelsius) || double.IsNaN(humidity.Value))
                     continue;
  
-                var res = $"Temperature: {temp.DegreesCelsius:0.0}°C, Humidity: {humidity:0.0}%";
+                var res = $"Temperature: {temp.DegreesCelsius:0.0}°C, Humidity: {humidity.Value:0.0}%";
                 Console.WriteLine(res);
                 await webSocket.SendAsync(
                     buffer: new ArraySegment<byte>(
