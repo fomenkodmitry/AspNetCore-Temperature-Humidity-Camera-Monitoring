@@ -1,21 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Net.WebSockets;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Configuration;
+using Domain.Webcam;
 using Iot.Device.DHTxx;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Services;
 
 namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
 {
@@ -31,6 +29,12 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddSingleton(Configuration.GetSection(nameof(CameraConfiguration))
+                .Get<CameraConfiguration>());
+
+            services.AddScoped<IWebcamService, WebcamService>();
+            
             services.AddCors();
             services.AddMvc();
             services.AddControllers();
@@ -62,7 +66,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
                     }
                     else
                     {
-                        context.Response.StatusCode = 400;
+                        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     }
                 }
                 else
@@ -88,7 +92,7 @@ namespace AspNetCore_Temperature_Humidity_Camera_Monitoring
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
-        private async Task _runDht(WebSocket webSocket)
+        private static async Task _runDht(WebSocket webSocket)
         {
             var cancellationToken = new CancellationTokenSource(TimeSpan.FromMinutes(3)).Token;
             using var dht = new Dht22(4);

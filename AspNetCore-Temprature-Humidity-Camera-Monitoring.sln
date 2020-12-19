@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore-Temperature-Humidity-Camera-Monitoring", "AspNetCore-Temperature-Humidity-Camera-Monitoring\AspNetCore-Temperature-Humidity-Camera-Monitoring.csproj", "{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{AF8A58D9-E46C-4F8C-BB31-8ADBF5B249F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{1FE8FE13-F109-4E93-B63A-2A75A916E67E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BCF0722-1B8A-4EA1-9FEB-0D6D1983D46D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF8A58D9-E46C-4F8C-BB31-8ADBF5B249F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF8A58D9-E46C-4F8C-BB31-8ADBF5B249F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF8A58D9-E46C-4F8C-BB31-8ADBF5B249F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF8A58D9-E46C-4F8C-BB31-8ADBF5B249F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FE8FE13-F109-4E93-B63A-2A75A916E67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FE8FE13-F109-4E93-B63A-2A75A916E67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FE8FE13-F109-4E93-B63A-2A75A916E67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FE8FE13-F109-4E93-B63A-2A75A916E67E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
